@@ -1,0 +1,58 @@
+package main
+
+import (
+	"errors"
+	"testing"
+)
+
+func TestHello(t *testing.T) {
+	assertCorrectMessage := func(t *testing.T, got, want string) {
+		t.Helper()
+		if got != want {
+			t.Errorf("got %q wanted %q", got, want)
+		}
+	}
+
+	assertCorrectError := func(t *testing.T, got, want error) {
+		t.Helper()
+		if got.Error() != want.Error() {
+			t.Errorf("got %q wanted %q", got, want)
+		}
+	}
+
+	t.Run("saying hello to people", func(t *testing.T) {
+		//		assert := assert.New(t)
+		got, _ := hello("bob", "")
+		want := "Hello bob"
+		assertCorrectMessage(t, got, want)
+		//		assert.Equalf(got, want, "oh god its all broken")
+		//		assert.EqualError(got, want, "its meant to be broken")
+	})
+
+	t.Run("error when an empty string is supplied", func(t *testing.T) {
+		gotMessage, gotErr := hello("", "")
+		wantMessage := ""
+		wantErr := errors.New("argh")
+		assertCorrectMessage(t, gotMessage, wantMessage)
+		assertCorrectError(t, gotErr, wantErr)
+
+	})
+
+	t.Run("say 'hola' when Spanish language option passed", func(t *testing.T) {
+		got, _ := hello("", "Spanish")
+		want := "Hola world"
+		assertCorrectMessage(t, got, want)
+	})
+
+	t.Run("say 'bonjour' when French language option passed", func(t *testing.T) {
+		got, _ := hello("", "French")
+		want := "Bonjour world"
+		assertCorrectMessage(t, got, want)
+	})
+
+	t.Run("get the number 5", func(t *testing.T) {
+		got := number()
+		want := "5"
+		assertCorrectMessage(t, got, want)
+	})
+}
