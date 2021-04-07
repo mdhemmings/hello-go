@@ -25,5 +25,7 @@ jobs:
       run: go test -v ./...
 
     - name: Publish
-      uses: actions/Publish
-      
+      uses: actions/upload-artifact@v2
+      with:
+        name: hello-go
+        path: ./hello
