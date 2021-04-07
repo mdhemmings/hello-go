@@ -18,11 +18,13 @@ jobs:
       with:
         go-version: 1.15
 
-    - name: Build
-      run: go build -v ./... -o hello-go
-
     - name: Test
       run: go test -v ./...
+
+
+    - name: Build
+      run: go build -o hello-go -v ./...
+      depends_on: 
 
     - name: Show
       run: ls ./
