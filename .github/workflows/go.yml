@@ -24,7 +24,6 @@ jobs:
 
     - name: Build
       run: go build -o hello-go -v ./...
-      depends_on: 
 
     - name: Show
       run: ls ./
